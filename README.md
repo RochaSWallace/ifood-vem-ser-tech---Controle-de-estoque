@@ -14,6 +14,7 @@ Uma interface via linha de comando para um sistema de controle de estoque, visa 
 
 # Como rodar
 
+1.  Clone esse repositório na pasta desejada:
 ~~~
 git clone https://github.com/RochaSWallace/ifood-vem-ser-tech---Controle-de-estoque.git
 ~~~
