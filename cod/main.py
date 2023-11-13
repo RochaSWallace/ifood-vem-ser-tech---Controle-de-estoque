@@ -18,7 +18,16 @@ def cadastro_produto() -> list:
         produto["descricao"] = input("Digite o texto descritivo: ")
     return produto
 
-
+def atualizar_cadastro(produtos, id_produto):
+    for produto in produtos:
+        if produto["id"] == id_produto:
+            print("Produto encontrado. Atualize as informações:")
+            novo_produto = cadastro_produto()
+            produto.update(novo_produto)
+            print("Cadastro atualizado com sucesso!")
+            return
+    print("Produto não encontrado.")
+    
 def main():
 
     produtos = []
@@ -40,8 +49,11 @@ def main():
             case 3:
                 pass
             case 4:
-                pass
+            id_produto = input("Digite o ID do produto que deseja atualizar: ")
+            atualizar_cadastro(produtos, id_produto)
             case 5:
                 pass
             case 6:
                 break
+
+
