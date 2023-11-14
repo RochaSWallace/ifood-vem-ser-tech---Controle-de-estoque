@@ -20,13 +20,30 @@ def cadastro_produto() -> list:
 
 def atualizar_cadastro(produtos, id_produto):
     for produto in produtos:
-        if produto["id"] == id_produto:
+        if produto['id'] == id_produto:
             print("Produto encontrado. Atualize as informações:")
             novo_produto = cadastro_produto()
             produto.update(novo_produto)
             print("Cadastro atualizado com sucesso!")
             return
     print("Produto não encontrado.")
+
+def consultar_produto(produtos, id_produto):
+    sair = 'S'
+    while True:
+        for produto in produtos:
+            if produto["id"] == id_produto:
+                print("Produto encontrado. Detalhes do produto:")
+                for chave, valor in produto.items():
+                    print(f"{chave.capitalize()}: {valor}")
+
+        sair = input('Deseja continuar?(S/N)') 
+        if sair.upper() != 'N':
+            id_produto = int(input("Digite o ID do produto que deseja consultar: "))            
+            continue
+        else:
+            return 
+
     
 def main():
 
@@ -45,15 +62,22 @@ def main():
             case 1:
                 produtos.append(cadastro_produto())
             case 2:
-                pass
+                #variavel crida para teste
+                produtos = [{'id': 1, 'nome': 'hamburguer'},{'id': 2, 'nome': 'batata frita'},]
+                
+                id_produto_consulta = int(input("Digite o ID do produto que deseja consultar: "))
+                consultar_produto(produtos, id_produto_consulta)
             case 3:
                 pass
             case 4:
-            id_produto = input("Digite o ID do produto que deseja atualizar: ")
-            atualizar_cadastro(produtos, id_produto)
+                while True:
+                    id_produto = input("Digite o ID do produto que deseja atualizar: ")
+                    atualizar_cadastro(produtos, id_produto)
+                
             case 5:
                 pass
             case 6:
                 break
 
 
+main()
