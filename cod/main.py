@@ -44,6 +44,16 @@ def consultar_produto(produtos, id_produto):
         else:
             return 
 
+
+def listar_produtos(produto):
+    if len(produto) == 0:
+        print("Não existem produtos cadastrados.")
+    else:
+        print('-'*5 + "Produtos cadastrados: " + '-'*5)
+        for item in produto:
+            print(f"id: {item['id']}, Nome: {item['nome']}
+            
+                  
 def excluir_cadastro(produtos, id_produto):
     count = 0
     for id in produtos:
@@ -56,7 +66,7 @@ def excluir_cadastro(produtos, id_produto):
     else:
         print('Produto não localizado.')
         return produtos
-    
+                
 def main():
 
     produtos = []
