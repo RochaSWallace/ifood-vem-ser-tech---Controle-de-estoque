@@ -44,6 +44,18 @@ def consultar_produto(produtos, id_produto):
         else:
             return 
 
+def excluir_cadastro(produtos, id_produto):
+    count = 0
+    for id in produtos:
+        if id["id"] == id_produto:
+            produtos.remove(id)
+            count = 1
+    if count == 1:
+        print('Produto excluído com sucesso')
+        return produtos
+    else:
+        print('Produto não localizado.')
+        return produtos
     
 def main():
 
@@ -75,7 +87,13 @@ def main():
                     atualizar_cadastro(produtos, id_produto)
                 
             case 5:
-                pass
+                while True:
+                    id_produto = input("Digite o ID do produto que deseja atualizar: ")
+                    if id_produto.isdigit():
+                        excluir_cadastro(produtos,id_produto)
+                        break
+                    else:
+                        print('Erro de digitação, favor digite novamente.')
             case 6:
                 break
 
