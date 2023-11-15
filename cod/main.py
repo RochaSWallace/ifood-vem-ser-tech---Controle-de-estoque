@@ -44,14 +44,29 @@ def consultar_produto(produtos, id_produto):
         else:
             return 
 
+
 def listar_produtos(produto):
     if len(produto) == 0:
         print("Não existem produtos cadastrados.")
     else:
         print('-'*5 + "Produtos cadastrados: " + '-'*5)
         for item in produto:
-            print(f"id: {item['id']}, Nome: {item['nome']}")
-    
+            print(f"id: {item['id']}, Nome: {item['nome']}
+            
+                  
+def excluir_cadastro(produtos, id_produto):
+    count = 0
+    for id in produtos:
+        if id["id"] == id_produto:
+            produtos.remove(id)
+            count = 1
+    if count == 1:
+        print('Produto excluído com sucesso')
+        return produtos
+    else:
+        print('Produto não localizado.')
+        return produtos
+                
 def main():
 
     produtos = []
@@ -82,7 +97,13 @@ def main():
                     atualizar_cadastro(produtos, id_produto)
                 
             case 5:
-                pass
+                while True:
+                    id_produto = input("Digite o ID do produto que deseja atualizar: ")
+                    if id_produto.isdigit():
+                        excluir_cadastro(produtos,id_produto)
+                        break
+                    else:
+                        print('Erro de digitação, favor digite novamente.')
             case 6:
                 break
 
