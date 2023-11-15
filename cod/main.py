@@ -22,10 +22,34 @@ def atualizar_cadastro(produtos, id_produto):
     for produto in produtos:
         if produto['id'] == id_produto:
             print("Produto encontrado. Atualize as informações:")
-            novo_produto = cadastro_produto()
-            produto.update(novo_produto)
+            
+            while True:
+                print("""Escolha a informação a ser atualizada:
+                    1 - Nome
+                    2 - Valor
+                    3 - Quantidade
+                    4 - Descrição
+                    5 - Sair""")
+                escolha = int(input("Digite o número correspondente à informação que deseja atualizar: "))
+
+                if escolha == 5:
+                    break
+                elif escolha == 1:
+                    produto["nome"] = input("Digite o novo nome do produto: ")
+                elif escolha == 2:
+                    produto["valor"] = float(input("Digite o novo valor do produto: "))
+                elif escolha == 3:
+                    produto["quantidade"] = int(input("Digite a nova quantidade do produto em estoque: "))
+                elif escolha == 4:
+                    texto_descrivo = input("Digite o novo texto descritivo ou 'S' para manter o mesmo: ").lower()
+                    if texto_descrivo != "s":
+                        produto["descricao"] = texto_descrivo
+                else:
+                    print("Opção inválida. Tente novamente.")
+
             print("Cadastro atualizado com sucesso!")
             return
+    
     print("Produto não encontrado.")
 
 def consultar_produto(produtos, id_produto):
