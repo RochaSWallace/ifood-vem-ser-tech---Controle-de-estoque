@@ -1,12 +1,12 @@
 
-def cadastro_produto() -> list:
+def cadastro_produto() -> dict:
 
     print("bem vindo ao cadastro de produtos!")
     produto = {}
 
-    produto["id"] = input("Digite o id do produto: ")
+    produto["id"] = int(input("Digite o id do produto: "))
     produto["nome"] = input("Digite o nome do produto a ser cadastrado: ")
-    produto["valor"] = float("Digite o valor do produto: ")
+    produto["valor"] = float(input("Digite o valor do produto: "))
     produto["quantidade"] = int(input("Digite a quantidade do produto em estoque: "))
     while True:
         especificacao = input("Digite o tipo de especificação que deseja adicionar ou S para sair: ").lower()
@@ -45,13 +45,13 @@ def consultar_produto(produtos, id_produto):
             return 
 
 
-def listar_produtos(produto):
-    if len(produto) == 0:
+def listar_produtos(produtos) -> None:
+    if len(produtos) == 0:
         print("Não existem produtos cadastrados.")
     else:
         print('-'*5 + "Produtos cadastrados: " + '-'*5)
-        for item in produto:
-            print(f"id: {item['id']}, Nome: {item['nome']}
+        for item in produtos:
+            print(f"id: {item['id']}, Nome: {item['nome']}")
             
                   
 def excluir_cadastro(produtos, id_produto):
@@ -78,28 +78,24 @@ def main():
             4 - Atualizar produtos
             5 - Excluir cadastro
             6 - Sair""")
-        escolha = int(input("Escolha um das opções acima: "))
+        escolha = int(input("Escolha uma das opções acima: "))
 
         match escolha:
             case 1:
                 produtos.append(cadastro_produto())
-            case 2:
-                #variavel crida para teste
-                produtos = [{'id': 1, 'nome': 'hamburguer'},{'id': 2, 'nome': 'batata frita'},]
-                
+            case 2:               
                 id_produto_consulta = int(input("Digite o ID do produto que deseja consultar: "))
                 consultar_produto(produtos, id_produto_consulta)
             case 3:
-                pass
+                listar_produtos(produtos=produtos)
             case 4:
-                while True:
-                    id_produto = input("Digite o ID do produto que deseja atualizar: ")
-                    atualizar_cadastro(produtos, id_produto)
-                
+                id_produto = int(input("Digite o ID do produto que deseja atualizar: "))
+                atualizar_cadastro(produtos, id_produto)               
             case 5:
                 while True:
                     id_produto = input("Digite o ID do produto que deseja atualizar: ")
                     if id_produto.isdigit():
+                        id_produto = int(id_produto)
                         excluir_cadastro(produtos,id_produto)
                         break
                     else:
