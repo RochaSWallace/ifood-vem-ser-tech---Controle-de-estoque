@@ -1,3 +1,4 @@
+import json
 
 def cadastro_produto() -> dict:
 
@@ -17,6 +18,7 @@ def cadastro_produto() -> dict:
     if texto_descrivo == "s":
         produto["descricao"] = input("Digite o texto descritivo: ")
     return produto
+
 
 def atualizar_cadastro(produtos, id_produto):
     for produto in produtos:
@@ -51,6 +53,7 @@ def atualizar_cadastro(produtos, id_produto):
             return
     
     print("Produto não encontrado.")
+
 
 def consultar_produto(produtos, id_produto):
     sair = 'S'
@@ -90,10 +93,15 @@ def excluir_cadastro(produtos, id_produto):
     else:
         print('Produto não localizado.')
         return produtos
-                
-def main():
 
-    produtos = []
+
+def main():
+    with open(file="dados//dados_produtos.json", mode="r", encoding="utf8") as arquivo:
+        data = json.load(arquivo)
+    if  data:
+        produtos = data
+    else:
+        produtos = []
     while True:
         print("""Menu principal: 
             1 - Cadastro produto
@@ -103,7 +111,6 @@ def main():
             5 - Excluir cadastro
             6 - Sair""")
         escolha = int(input("Escolha uma das opções acima: "))
-
         match escolha:
             case 1:
                 produtos.append(cadastro_produto())
@@ -117,7 +124,7 @@ def main():
                 atualizar_cadastro(produtos, id_produto)               
             case 5:
                 while True:
-                    id_produto = input("Digite o ID do produto que deseja atualizar: ")
+                    id_produto = input("Digite o ID do produto que deseja excluir: ")
                     if id_produto.isdigit():
                         id_produto = int(id_produto)
                         excluir_cadastro(produtos,id_produto)
@@ -125,7 +132,11 @@ def main():
                     else:
                         print('Erro de digitação, favor digite novamente.')
             case 6:
+                with open(file="dados//dados_produtos.json", mode="w", encoding="utf8") as arquivo:
+                    json.dump(produtos, arquivo, indent= 4 * " ")
                 break
+            case _:
+                print("Opção inválida!")
 
 
 main()
