@@ -1,0 +1,9 @@
+[
+    {
+        "id": 1,
+        "nome": "ma\u00e7a",
+        "valor": 7.0,
+        "quantidade": 45,
+        "tipo": "verde"
+    }
+]
