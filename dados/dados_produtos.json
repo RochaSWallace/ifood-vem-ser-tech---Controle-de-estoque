@@ -5,5 +5,12 @@
         "valor": 7.0,
         "quantidade": 45,
         "tipo": "verde"
+    },
+    {
+        "id": 2,
+        "nome": "Biscoito Cebolitos",
+        "valor": 8.7,
+        "quantidade": 50,
+        "embalagem": "80Gr."
     }
 ]

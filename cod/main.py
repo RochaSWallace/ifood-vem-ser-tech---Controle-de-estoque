@@ -83,12 +83,18 @@ def listar_produtos(produtos) -> None:
                   
 def excluir_cadastro(produtos, id_produto):
     count = 0
+    id_produto = int(id_produto)
+    plinha = '\n'
     for id in produtos:
         if id["id"] == id_produto:
-            produtos.remove(id)
-            count = 1
+            print(f'''{plinha*2}Produto localizado!{plinha*2}> > ID: {id['id']} - Nome: {id['nome']} < <{plinha}''')
+            confirmar = input(f'Você confirma a exclusão desse produto?{plinha}(Digite s para confirmar): ').lower() 
+            if confirmar == 's':
+                produtos.remove(id)
+                count = 1
     if count == 1:
         print('Produto excluído com sucesso')
+        os.clear
         return produtos
     else:
         print('Produto não localizado.')
