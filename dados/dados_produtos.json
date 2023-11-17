@@ -12,5 +12,12 @@
         "valor": 8.7,
         "quantidade": 50,
         "embalagem": "80Gr."
+    },
+    {
+        "id": 3,
+        "nome": "morango",
+        "valor": 6.0,
+        "quantidade": 23,
+        "tipo": "franc\u00eas"
     }
 ]
