@@ -72,22 +72,28 @@ def atualizar_cadastro(produtos, id_produto):
     print("Produto não encontrado.")
 
 
-def consultar_produto(produtos, id_produto):
-    sair = 'S'
+def consultar_produto(produtos, produto_consultar):
     while True:
+        chave_consult = 'id' if produto_consultar.isdigit() else 'nome'
+        produto_encontrado = None
+
         for produto in produtos:
-            if produto["id"] == id_produto:
-                print("Produto encontrado. Detalhes do produto:")
-                for chave, valor in produto.items():
-                    print(f"{chave.capitalize()}: {valor}")
-
-        sair = input('Deseja continuar?(S/N)') 
-        if sair.upper() != 'N':
-            id_produto = int(input("Digite o ID do produto que deseja consultar: "))            
-            continue
+            if str(produto[chave_consult]) == produto_consultar:
+                produto_encontrado = produto
+                break
+        
+        if produto_encontrado:
+            print("Produto encontrado. Detalhes do produto:")
+            for chave, valor in produto_encontrado.items():
+                print(f"{chave.capitalize()}: {valor}")
         else:
-            return 
+            print("Produto não encontrado.")
 
+        sair = input('Digite (S) para sair ou Enter para continuar a consulta ')
+        if sair.upper() == 'S':
+            return
+        else:
+            produto_consultar = input("Digite o ID ou nome do produto que deseja consultar: ")
 
 def listar_produtos(produtos) -> None:
     if len(produtos) == 0:
@@ -140,8 +146,8 @@ def main():
                 ids = [i["id"] for i in produtos]
                 produtos.append(cadastro_produto(ids))
             case 2:               
-                id_produto_consulta = int(input("Digite o ID do produto que deseja consultar: "))
-                consultar_produto(produtos, id_produto_consulta)
+                produto_consultar = input("Digite o ID ou nome do produto que deseja consultar: ")
+                consultar_produto(produtos, produto_consultar)
             case 3:
                 listar_produtos(produtos=produtos)
             case 4:
