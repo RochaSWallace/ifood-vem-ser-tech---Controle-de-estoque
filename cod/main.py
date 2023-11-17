@@ -1,14 +1,26 @@
 import json
 
-def cadastro_produto() -> dict:
+def cadastro_produto(ids) -> dict:
 
     print("bem vindo ao cadastro de produtos!")
+    id_max = max(ids)
     produto = {}
-
-    produto["id"] = int(input("Digite o id do produto: "))
+    produto["id"] = id_max + 1
     produto["nome"] = input("Digite o nome do produto a ser cadastrado: ")
-    produto["valor"] = float(input("Digite o valor do produto: "))
-    produto["quantidade"] = int(input("Digite a quantidade do produto em estoque: "))
+    while True:
+        try:
+            produto["valor"] = float(input("Digite o valor do produto: "))
+        except ValueError:
+            print("Valor digitado incorretamente, por favor digite novamente")
+        else:
+            break
+    while True:
+        try:
+            produto["quantidade"] = int(input("Digite a quantidade do produto em estoque: "))
+        except ValueError:
+            print("Valor digitado incorretamente, por favor digite novamente")
+        else:
+            break
     while True:
         especificacao = input("Digite o tipo de especificação que deseja adicionar ou S para sair: ").lower()
         if especificacao == "s":
@@ -102,7 +114,7 @@ def excluir_cadastro(produtos, id_produto):
 
 
 def main():
-    with open(file="dados//dados_produtos.json", mode="r", encoding="utf8") as arquivo:
+    with open(file="dados/dados_produtos.json", mode="r", encoding="utf8") as arquivo:
         data = json.load(arquivo)
     if  data:
         produtos = data
@@ -119,7 +131,8 @@ def main():
         escolha = int(input("Escolha uma das opções acima: "))
         match escolha:
             case 1:
-                produtos.append(cadastro_produto())
+                ids = [i["id"] for i in produtos]
+                produtos.append(cadastro_produto(ids))
             case 2:               
                 id_produto_consulta = int(input("Digite o ID do produto que deseja consultar: "))
                 consultar_produto(produtos, id_produto_consulta)
@@ -138,7 +151,7 @@ def main():
                     else:
                         print('Erro de digitação, favor digite novamente.')
             case 6:
-                with open(file="dados//dados_produtos.json", mode="w", encoding="utf8") as arquivo:
+                with open(file="dados/dados_produtos.json", mode="w", encoding="utf8") as arquivo:
                     json.dump(produtos, arquivo, indent= 4 * " ")
                 break
             case _:
