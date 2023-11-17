@@ -1,4 +1,5 @@
 import json
+from os import system
 
 def cadastro_produto(ids) -> dict:
 
@@ -29,6 +30,10 @@ def cadastro_produto(ids) -> dict:
     texto_descrivo = input("Caso deseje adicionar um texto descritivo, digite S: ").lower()
     if texto_descrivo == "s":
         produto["descricao"] = input("Digite o texto descritivo: ")
+    system("cls")
+    print("Produto cadastrado com sucesso!")
+    for key, value in produto.items():
+        print(f"{key}: {value}")
     return produto
 
 
@@ -106,7 +111,7 @@ def excluir_cadastro(produtos, id_produto):
                 count = 1
     if count == 1:
         print('Produto excluído com sucesso')
-        os.clear
+        system("cls")
         return produtos
     else:
         print('Produto não localizado.')
@@ -129,6 +134,7 @@ def main():
             5 - Excluir cadastro
             6 - Sair""")
         escolha = int(input("Escolha uma das opções acima: "))
+        system("cls")
         match escolha:
             case 1:
                 ids = [i["id"] for i in produtos]
@@ -149,6 +155,7 @@ def main():
                         excluir_cadastro(produtos,id_produto)
                         break
                     else:
+                        system("cls")
                         print('Erro de digitação, favor digite novamente.')
             case 6:
                 with open(file="dados/dados_produtos.json", mode="w", encoding="utf8") as arquivo:
