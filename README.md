@@ -2,7 +2,7 @@
 Uma interface via linha de comando para um sistema de controle de estoque, visa cumprir os requisitos do projeto máteria logica de programação II, do curso analista de dados da **Ada**, patrocinado pelo **potência tech ifood**. O projeto está sendo realizado no final do ano de 2023 e conta com a colaboração de 5 integrantes:
 * Carlos André
 * Edson Nogueira
-* Jheny Oliveira
+* Jhenyffer Oliveira
 * Rodrigo Udenal
 * Wallace Souza
 
