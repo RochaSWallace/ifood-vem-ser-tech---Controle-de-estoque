@@ -95,6 +95,7 @@ def consultar_produto(produtos, produto_consultar):
         else:
             produto_consultar = input("Digite o ID ou nome do produto que deseja consultar: ")
 
+
 def listar_produtos(produtos) -> None:
     if len(produtos) == 0:
         print("Não existem produtos cadastrados.")
